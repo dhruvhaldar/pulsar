@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulsar Workbench</title>
+    <link rel="stylesheet" href="clay.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Three.js Background -->
+    <div id="space-bg"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="clay-panel header-panel">
+            <h1>Pulsar ✨</h1>
+            <p>System Identification and Physical Modeling</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Sidebar / Workbench Tools -->
+            <div class="clay-panel tools-panel">
+                <h2>1. Physical Modeling</h2>
+                <div id="workbench-area" class="clay-inset"></div>
+                <button class="clay-button" onclick="simulateSystem()">Simulate Model</button>
+            </div>
+
+            <!-- Data Upload & Identification -->
+            <div class="clay-panel identify-panel">
+                <h2>2. Data-Driven Identification (ARX)</h2>
+                <div class="file-upload clay-inset">
+                    <input type="file" id="csv-upload" accept=".csv" />
+                    <label for="csv-upload">Upload CSV (time, u, y)</label>
+                </div>
+                <div class="arx-params">
+                    <label>na: <input type="number" id="na" value="2" class="clay-input"></label>
+                    <label>nb: <input type="number" id="nb" value="2" class="clay-input"></label>
+                    <label>nk: <input type="number" id="nk" value="1" class="clay-input"></label>
+                </div>
+                <button class="clay-button" onclick="identifySystem()">Estimate ARX</button>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+            <div class="clay-panel chart-container">
+                <h3>Bode Plot (Magnitude)</h3>
+                <canvas id="bodeMagChart"></canvas>
+            </div>
+            <div class="clay-panel chart-container">
+                <h3>Bode Plot (Phase)</h3>
+                <canvas id="bodePhaseChart"></canvas>
+            </div>
+            <div class="clay-panel chart-container">
+                <h3>Validation (Residual Autocorrelation)</h3>
+                <canvas id="validationChart"></canvas>
+            </div>
+            <div class="clay-panel chart-container">
+                <h3>Time Series (Simulation/Fit)</h3>
+                <canvas id="timeSeriesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="three_bg.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
