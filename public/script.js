@@ -6,8 +6,8 @@ let timeSeriesChartInstance = null;
 
 // D3.js Workbench Setup
 const workbenchArea = d3.select("#workbench-area");
-const width = 400;
-const height = 200;
+const width = 300;
+const height = 100;
 
 const svg = workbenchArea.append("svg")
     .attr("width", "100%")
@@ -16,9 +16,9 @@ const svg = workbenchArea.append("svg")
 
 // Simulated Physical Blocks Data
 const blocks = [
-    { id: "m1", type: "Mass", value: 2.0, x: 50, y: 100 },
-    { id: "k1", type: "Spring", value: 10.0, x: 150, y: 100 },
-    { id: "c1", type: "Damper", value: 1.5, x: 250, y: 100 }
+    { id: "m1", type: "Mass", value: 2.0, x: 50, y: 50 },
+    { id: "k1", type: "Spring", value: 10.0, x: 150, y: 50 },
+    { id: "c1", type: "Damper", value: 1.5, x: 250, y: 50 }
 ];
 
 // Define drop shadow filter for D3 elements to match Claymorphism vaguely

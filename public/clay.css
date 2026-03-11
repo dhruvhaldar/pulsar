@@ -136,6 +136,9 @@ body {
   min-height: 150px;
   margin-bottom: 0.5rem;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* File Upload */
