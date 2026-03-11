@@ -66,14 +66,14 @@ pulsar/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/pulsar.git
+   git clone https://github.com/dhruvhaldar/pulsar.git
    cd pulsar
    ```
 
 2. Create and activate a virtual environment (optional but recommended):
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ./venv/Scripts/activate  # On Windows: .\venv\Scripts\Activate.ps1
    ```
 
 3. Install the dependencies:
