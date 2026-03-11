@@ -55,8 +55,8 @@ node.append("rect")
     .attr("ry", 20)
     .attr("x", -40)
     .attr("y", -20)
-    .style("fill", "#2a2a4a")
-    .style("stroke", "#00ffff")
+    .style("fill", "#ffffff")
+    .style("stroke", "#7ed321")
     .style("stroke-width", "2px")
     .attr("filter", "url(#clay-shadow)");
 
@@ -64,7 +64,7 @@ node.append("rect")
 node.append("text")
     .attr("dy", 5)
     .attr("text-anchor", "middle")
-    .style("fill", "#e0e0ff")
+    .style("fill", "#2c3e50")
     .style("font-family", "sans-serif")
     .style("font-size", "12px")
     .style("pointer-events", "none")
@@ -86,8 +86,8 @@ function dragended(event, d) {
 
 // ---------------------------------------------------------
 // Chart.js Default Config overrides
-Chart.defaults.color = '#e0e0ff';
-Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+Chart.defaults.color = '#2c3e50';
+Chart.defaults.borderColor = 'rgba(0, 0, 0, 0.1)';
 
 // Generic Chart setup function
 function createChart(ctxId, type, data, options) {
@@ -178,7 +178,7 @@ function plotTimeSeries(t, y1, label1, y2, label2, isComparison = false) {
     const datasets = [{
         label: label1,
         data: y1,
-        borderColor: '#00ffff',
+        borderColor: '#7ed321',
         backgroundColor: 'transparent',
         borderWidth: 2,
         pointRadius: 0
@@ -188,7 +188,7 @@ function plotTimeSeries(t, y1, label1, y2, label2, isComparison = false) {
         datasets.push({
             label: label2,
             data: y2,
-            borderColor: '#ff00ff',
+            borderColor: '#f5a623',
             borderDash: isComparison ? [5, 5] : [],
             backgroundColor: 'transparent',
             borderWidth: 2,
@@ -219,7 +219,7 @@ function plotBode(w, mag, phase) {
         datasets: [{
             label: 'Magnitude |H(e^jw)|',
             data: mag.map(m => 20 * Math.log10(m)), // dB
-            borderColor: '#00ffff',
+            borderColor: '#7ed321',
             borderWidth: 2,
             pointRadius: 0
         }]
@@ -238,7 +238,7 @@ function plotBode(w, mag, phase) {
         datasets: [{
             label: 'Phase (deg)',
             data: phase,
-            borderColor: '#ff00ff',
+            borderColor: '#f5a623',
             borderWidth: 2,
             pointRadius: 0
         }]
@@ -265,7 +265,7 @@ function plotValidation(lags, r_ee) {
             {
                 label: 'Auto-correlation',
                 data: r_ee,
-                backgroundColor: '#00ffff'
+                backgroundColor: '#7ed321'
             },
             {
                 type: 'line',
