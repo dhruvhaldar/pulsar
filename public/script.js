@@ -129,19 +129,71 @@ async function simulateSystem() {
     }
 }
 
+let sampleFileObj = null;
+
+function useSampleData() {
+    // Generate a simple step response of a 2nd order system
+    let csvContent = "";
+    let dt = 0.1;
+    let t = 0;
+    // Difference equation: y[k] = 1.5 y[k-1] - 0.7 y[k-2] + 0.1 u[k-1] + 0.05 u[k-2]
+    let y1 = 0, y2 = 0;
+    let u1 = 0, u2 = 0;
+    
+    for (let i = 0; i < 100; i++) {
+        let u = t >= 1.0 ? 1.0 : 0.0;
+        let y = 1.5 * y1 - 0.7 * y2 + 0.1 * u1 + 0.05 * u2;
+        // add some noise
+        y += (Math.random() - 0.5) * 0.05;
+        
+        csvContent += `${t.toFixed(2)},${u.toFixed(2)},${y.toFixed(4)}\n`;
+        
+        y2 = y1;
+        y1 = y;
+        u2 = u1;
+        u1 = u;
+        t += dt;
+    }
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    sampleFileObj = new File([blob], "sample_data.csv", { type: "text/csv" });
+    
+    document.querySelector('label[for="csv-upload"]').innerText = "Sample Data Generated & Selected ✅";
+    document.getElementById('csv-upload').value = ""; // Clear file input
+}
+
+// Attach event listener so manual uploads clear out the sample data
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('csv-upload').addEventListener('change', function() {
+        if(this.files.length > 0) {
+            sampleFileObj = null;
+            document.querySelector('label[for="csv-upload"]').innerText = `Selected: ${this.files[0].name}`;
+        } else {
+            document.querySelector('label[for="csv-upload"]').innerText = "Upload CSV (time, u, y)";
+        }
+    });
+});
+
 async function identifySystem() {
     const fileInput = document.getElementById('csv-upload');
     const na = document.getElementById('na').value;
     const nb = document.getElementById('nb').value;
     const nk = document.getElementById('nk').value;
 
-    if (!fileInput.files.length) {
-        alert("Please upload a CSV file first.");
+    let fileToUpload = null;
+    if (fileInput.files.length > 0) {
+        fileToUpload = fileInput.files[0];
+    } else if (sampleFileObj) {
+        fileToUpload = sampleFileObj;
+    }
+
+    if (!fileToUpload) {
+        alert("Please upload a CSV file or click 'Use Sample Data' first.");
         return;
     }
 
     const formData = new FormData();
-    formData.append("file", fileInput.files[0]);
+    formData.append("file", fileToUpload);
     formData.append("na", na);
     formData.append("nb", nb);
     formData.append("nk", nk);
