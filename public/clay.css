@@ -118,8 +118,16 @@ body {
   flex-direction: column;
 }
 
-.chart-container canvas {
+.chart-wrapper {
+  position: relative;
   flex-grow: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+.chart-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Workbench specific */
