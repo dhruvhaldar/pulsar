@@ -1,5 +1,7 @@
+import os
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import numpy as np
 import io
@@ -149,3 +151,6 @@ async def identify(
 
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+if os.path.exists("public"):
+    app.mount("/", StaticFiles(directory="public", html=True), name="public")
