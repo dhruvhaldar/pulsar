@@ -38,7 +38,7 @@ class System:
         self.components.append(component)
 
     def assemble(self):
-        """
+        r"""
         Assemble the components into a state-space representation.
         \dot{x} = Ax + Bu
         y = Cx + Du

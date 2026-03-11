@@ -9,7 +9,7 @@ class DAESolver:
         self.D = D
 
     def solve(self, t_span, u_func, x0, method='BDF', max_step=0.1):
-        """
+        r"""
         Solve \dot{x} = Ax + Bu
         y = Cx + Du
         """
