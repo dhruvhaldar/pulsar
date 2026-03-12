@@ -23,46 +23,53 @@
             <p>System Identification and Physical Modeling</p>
         </header>
 
-        <div class="main-grid">
-            <!-- Sidebar / Workbench Tools -->
-            <div class="clay-panel tools-panel">
-                <h2>1. Physical Modeling</h2>
-                <div id="workbench-area" class="clay-inset"></div>
-                <button class="clay-button" onclick="simulateSystem()">Simulate Model</button>
+        <div class="two-column-layout">
+            <!-- Left Column: Controls -->
+            <div class="left-column">
+                <!-- Sidebar / Workbench Tools -->
+                <div class="clay-panel tools-panel" style="margin-bottom: 1rem;">
+                    <h2>1. Physical Modeling</h2>
+                    <div id="workbench-area" class="clay-inset"></div>
+                    <button class="clay-button" onclick="simulateSystem()">Simulate Model</button>
+                </div>
+
+                <!-- Data Upload & Identification -->
+                <div class="clay-panel identify-panel">
+                    <h2>2. Data-Driven Identification (ARX)</h2>
+                    <div class="file-upload clay-inset">
+                        <input type="file" id="csv-upload" accept=".csv" />
+                        <label for="csv-upload" style="margin-bottom: 10px; font-weight: bold;">Upload CSV (time, u, y)</label>
+                        <span style="font-size: 0.9em; margin-bottom: 10px; color: var(--dark-text-color);">OR</span>
+                        <button class="clay-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="useSampleData()">Use Sample Data</button>
+                    </div>
+                    <div class="arx-params">
+                        <label>na: <input type="number" id="na" value="2" class="clay-input"></label>
+                        <label>nb: <input type="number" id="nb" value="2" class="clay-input"></label>
+                        <label>nk: <input type="number" id="nk" value="1" class="clay-input"></label>
+                    </div>
+                    <button class="clay-button" onclick="identifySystem()">Estimate ARX</button>
+                </div>
             </div>
 
-            <!-- Data Upload & Identification -->
-            <div class="clay-panel identify-panel">
-                <h2>2. Data-Driven Identification (ARX)</h2>
-                <div class="file-upload clay-inset">
-                    <input type="file" id="csv-upload" accept=".csv" />
-                    <label for="csv-upload" style="margin-bottom: 10px; font-weight: bold;">Upload CSV (time, u, y)</label>
-                    <span style="font-size: 0.9em; margin-bottom: 10px; color: var(--dark-text-color);">OR</span>
-                    <button class="clay-button" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="useSampleData()">Use Sample Data</button>
+            <!-- Right Column: Bode Plots -->
+            <div class="right-column charts-grid">
+                <div class="clay-panel chart-container">
+                    <h3>Bode Plot (Magnitude)</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="bodeMagChart"></canvas>
+                    </div>
                 </div>
-                <div class="arx-params">
-                    <label>na: <input type="number" id="na" value="2" class="clay-input"></label>
-                    <label>nb: <input type="number" id="nb" value="2" class="clay-input"></label>
-                    <label>nk: <input type="number" id="nk" value="1" class="clay-input"></label>
+                <div class="clay-panel chart-container">
+                    <h3>Bode Plot (Phase)</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="bodePhaseChart"></canvas>
+                    </div>
                 </div>
-                <button class="clay-button" onclick="identifySystem()">Estimate ARX</button>
             </div>
         </div>
 
-        <!-- Charts Grid -->
-        <div class="charts-grid">
-            <div class="clay-panel chart-container">
-                <h3>Bode Plot (Magnitude)</h3>
-                <div class="chart-wrapper">
-                    <canvas id="bodeMagChart"></canvas>
-                </div>
-            </div>
-            <div class="clay-panel chart-container">
-                <h3>Bode Plot (Phase)</h3>
-                <div class="chart-wrapper">
-                    <canvas id="bodePhaseChart"></canvas>
-                </div>
-            </div>
+        <!-- Remaining Charts Grid (Validation & Time Series) -->
+        <div class="charts-grid remaining-charts" style="margin-top: 1rem;">
             <div class="clay-panel chart-container">
                 <h3>Validation (Residual Autocorrelation)</h3>
                 <div class="chart-wrapper">

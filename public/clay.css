@@ -98,12 +98,17 @@ body {
   text-shadow: 2px 2px 5px rgba(126, 211, 33, 0.3);
 }
 
-.main-grid {
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.left-column {
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: 1fr;
   gap: 1rem;
-  margin-bottom: 1rem;
 }
 
 .charts-grid {
